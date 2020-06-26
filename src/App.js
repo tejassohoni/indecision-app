@@ -17,6 +17,27 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    try {
+      const jsonGet = localStorage.getItem("options");
+      const options = JSON.parse(jsonGet);
+      if (options) {
+        this.setState(() => ({
+          options,
+        }));
+      }
+    } catch (e) {
+      //Do nothing
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const jsonSet = JSON.stringify(this.state.options);
+      localStorage.setItem("options", jsonSet);
+    }
+  }
+  componentWillUnmount() {}
+
   handleDeleteOptions() {
     this.setState(() => ({
       options: [],
