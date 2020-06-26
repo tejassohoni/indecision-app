@@ -1,4 +1,5 @@
 import React from "react";
+import ModalWin from "./Components/Modal/modal-component.jsx";
 import Header from "./Components/Header/header.component.jsx";
 import Actions from "./Components/Actions/actions.component.jsx";
 import Options from "./Components/Options/options.component.jsx";
@@ -12,11 +13,13 @@ class App extends React.Component {
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOptions = this.handleAddOptions.bind(this);
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
+    this.handleModal = this.handleModal.bind(this);
     this.state = {
-      options: props.options,
+      options: [],
+      selectedOption: props.selectedOption,
+      abc: 1,
     };
   }
-
   componentDidMount() {
     try {
       const jsonGet = localStorage.getItem("options");
@@ -36,27 +39,34 @@ class App extends React.Component {
       localStorage.setItem("options", jsonSet);
     }
   }
-  componentWillUnmount() {}
 
-  handleDeleteOptions() {
+  handleModal = () => {
+    this.setState(() => ({
+      selectedOption: undefined,
+    }));
+  };
+
+  handleDeleteOptions = () => {
     this.setState(() => ({
       options: [],
     }));
-  }
+  };
 
-  handlePick() {
+  handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
-    alert(option);
-  }
+    this.setState(() => ({
+      selectedOption: option,
+    }));
+  };
 
-  handleDeleteOption(optionToRemove) {
+  handleDeleteOption = (optionToRemove) => {
     this.setState((prevState) => ({
       options: prevState.options.filter((option) => {
         return optionToRemove !== option;
       }),
     }));
-  }
+  };
 
   handleAddOptions(option) {
     if (!option) {
@@ -83,13 +93,16 @@ class App extends React.Component {
           handleDeleteOption={this.handleDeleteOption}
         />
         <AddOptions handleAddOptions={this.handleAddOptions} />
+        <ModalWin
+          handleModal={this.handleModal}
+          selectedOption={this.state.selectedOption}
+        />
       </div>
     );
   }
 }
 
 App.defaultProps = {
-  options: [],
+  selectedOption: undefined,
 };
-
 export default App;
