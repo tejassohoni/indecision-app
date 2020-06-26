@@ -10,31 +10,48 @@ class App extends React.Component {
     super(props);
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
+    this.handleAddOptions = this.handleAddOptions.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
-      options: [1, 2, 3],
-      title: "Indecision App",
-      subtitle: "Let the computer decide",
+      options: props.options,
     };
   }
+
   handleDeleteOptions() {
-    this.setState(() => {
-      return { options: [] };
-    });
+    this.setState(() => ({
+      options: [],
+    }));
   }
-  handleAddOption() {
-    this.setState((prevState) => {
-      return { options: prevState.options.push() };
-    });
-  }
+
   handlePick() {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
     alert(option);
   }
+
+  handleDeleteOption(optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => {
+        return optionToRemove !== option;
+      }),
+    }));
+  }
+
+  handleAddOptions(option) {
+    if (!option) {
+      return "Please enter a value to add";
+    } else if (this.state.options.indexOf(option) > -1) {
+      return "This option already exists";
+    }
+    this.setState((prevState) => ({
+      options: prevState.options.concat([option]),
+    }));
+  }
+
   render() {
     return (
       <div className="App">
-        <Header title={this.state.title} subtitle={this.state.subtitle} />
+        <Header />
         <Actions
           hasOptions={this.state.options.length > 0}
           handlePick={this.handlePick}
@@ -42,11 +59,16 @@ class App extends React.Component {
         <Options
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
         />
-        <AddOptions options={this.state.options} />
+        <AddOptions handleAddOptions={this.handleAddOptions} />
       </div>
     );
   }
 }
+
+App.defaultProps = {
+  options: [],
+};
 
 export default App;
