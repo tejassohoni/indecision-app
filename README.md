@@ -11,7 +11,7 @@ git clone
 ```
 cd indecision-app
 ```
-Install the app using **yarn** or **npm**
+Install the dependencies using **yarn** or **npm**
 ```
 yarn / npm install (depending on your package manager)
 ```
