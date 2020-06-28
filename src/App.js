@@ -1,9 +1,10 @@
 import React from "react";
-import ModalWin from "./Components/Modal/modal-component.jsx";
+import ModalWin from "./Components/Modal/modal.component.jsx";
 import Header from "./Components/Header/header.component.jsx";
 import Actions from "./Components/Actions/actions.component.jsx";
 import Options from "./Components/Options/options.component.jsx";
 import AddOptions from "./Components/AddOptions/add-options.component.jsx";
+import "normalize.css/normalize.css";
 import "./App.css";
 
 class App extends React.Component {
@@ -83,20 +84,26 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Actions
-          hasOptions={this.state.options.length > 0}
-          handlePick={this.handlePick}
-        />
-        <Options
-          options={this.state.options}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
-        <AddOptions handleAddOptions={this.handleAddOptions} />
-        <ModalWin
-          handleModal={this.handleModal}
-          selectedOption={this.state.selectedOption}
-        />
+        <div className="container">
+          <Actions
+            hasOptions={this.state.options.length > 0}
+            handlePick={this.handlePick}
+          />
+          <div className="widget">
+            <Options
+              options={this.state.options}
+              handleDeleteOptions={this.handleDeleteOptions}
+              handleDeleteOption={this.handleDeleteOption}
+              hasOptions={this.state.options.length > 0}
+            />
+            <AddOptions handleAddOptions={this.handleAddOptions} />
+          </div>
+
+          <ModalWin
+            handleModal={this.handleModal}
+            selectedOption={this.state.selectedOption}
+          />
+        </div>
       </div>
     );
   }

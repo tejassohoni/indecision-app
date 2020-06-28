@@ -1,0 +1,22 @@
+.big-button {
+  background: #8357c5;
+  border: none;
+  border-bottom: 0.4rem solid darken(#8357c5, 10%);
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 30px;
+  padding: 2rem;
+  width: 100%;
+  outline: none;
+
+  &:hover {
+    background: #8330c8;
+    cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}

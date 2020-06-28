@@ -1,0 +1,46 @@
+.button {
+  background: #8357c5;
+  border: none;
+  border-bottom: 0.3rem solid darken(#8357c5, 10%);
+  color: white;
+  font-weight: 500;
+  padding: 1.2rem;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+.button--link {
+  background: none;
+  border: none;
+  color: #dbe9f4;
+
+  &:active {
+    outline: none;
+  }
+}
+
+.widget-header {
+  background: #3c4251;
+  color: #dbe9f4;
+  font-size: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.widget-message {
+  color: #dbe9f4;
+  padding: 15px;
+  padding-bottom: 30px;
+  font-size: 25px;
+  border-bottom: 1.5px solid #778899;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+}

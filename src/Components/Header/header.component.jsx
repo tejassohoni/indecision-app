@@ -1,16 +1,15 @@
 import React from "react";
+import "./header.styles.scss";
 
-const Header = (props) => {
-  return (
-    <div id="header">
-      <h1>{props.title}</h1>
-      {props.subtitle && <h2>{props.subtitle}</h2>}
-    </div>
-  );
-};
+const Header = (props) => (
+  <div className="header">
+    <h1 className="container title">{props.title}</h1>
+    {props.subtitle && <h2 className="container subtitle">{props.subtitle}</h2>}
+  </div>
+);
 
 Header.defaultProps = {
-  title: "Indecision App",
+  title: "Indecision",
   subtitle: "Let the computer decide",
 };
 
