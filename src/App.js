@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import ModalWin from "./Components/Modal/modal.component.jsx";
 import Header from "./Components/Header/header.component.jsx";
 import Actions from "./Components/Actions/actions.component.jsx";
@@ -82,7 +83,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <motion.div
+        className="App"
+        initial={{
+          y: 100,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+        }}
+      >
         <Header />
         <div className="container">
           <Actions
@@ -104,7 +118,7 @@ class App extends React.Component {
             selectedOption={this.state.selectedOption}
           />
         </div>
-      </div>
+      </motion.div>
     );
   }
 }

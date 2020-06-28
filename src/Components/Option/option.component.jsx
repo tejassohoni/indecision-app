@@ -1,20 +1,36 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./option.styles.scss";
 
-const Option = (props) => (
-  <div className="option">
-    <p className="option__text">
-      {props.count}. {props.optionText}
-    </p>
-    <button
-      className="button button--link"
-      onClick={(e) => {
-        props.handleDeleteOption(props.optionText);
+const Option = (props) => {
+  return (
+    <motion.div
+      className="option"
+      initial={{
+        x: 100,
+      }}
+      animate={{
+        x: 0,
+      }}
+      transition={{
+        duration: 0.3,
       }}
     >
-      Remove
-    </button>
-  </div>
-);
+      <p className="option__text">
+        {props.count}. {props.optionText}
+      </p>
+      <motion.button
+        initial={{ x: 100 }}
+        animate={{ x: 0 }}
+        className="button button--link"
+        onClick={(e) => {
+          props.handleDeleteOption(props.optionText);
+        }}
+      >
+        Remove
+      </motion.button>
+    </motion.div>
+  );
+};
 
 export default Option;
